@@ -11,60 +11,22 @@ export function updateUser(user) {
   };
 }
 
-export function updateSettings(settings) {
-  return dispatch => {
-    dispatch({ type: types.UPDATE_SETTINGS, settings });
-  };
-}
-
-export function updateUserToken(token) {
-  return dispatch => {
-    dispatch({ type: types.UPDATE_USER_TOKEN, token });
-  };
-}
-
-export function updateAnonymousUserToken(token) {
-  return dispatch => {
-    dispatch({ type: types.UPDATE_ANONYMOUS_USER_TOKEN, token });
-  };
-}
-
-export function clearUser() {
-  return dispatch => {
-    dispatch({ type: types.CLEAR_USER });
-  };
-}
-
-export function updateAnonymousUser(user) {
-  return dispatch => {
-    dispatch({ type: types.UPDATE_ANONYMOUS_USER, user });
-  };
-}
-
-export function signInAsAnonymous(token) {
-  return async (dispatch, getState) => {
-    const { auth, firebase } = getState();
-    const deviceId = guid();
-    const deviceToken = token || firebase.token;
-    const user = await userApi.signInAsAnonymous(auth, deviceId, deviceToken);
-    dispatch(updateAnonymousUser(user));
-  };
-}
 
 export function signIn(email, password) {
   return async (dispatch, getState) => {
-    dispatch(authAction.showLoading());
-    const { auth, firebase } = getState();
+    // dispatch(authAction.showLoading());
+    // const { auth, firebase } = getState();
     const deviceId = guid();
     const deviceToken = firebase.token;
-    try {
-      const user = await userApi.signIn(auth, { email, password }, deviceId, deviceToken);
-      dispatch(updateUser(user));
-      dispatch(orderAction.updateCurrentOrders(user.currentOrders));
-    } catch (error) {
-      dispatch(appAction.openPopup({ title: 'Error', message: err.message }));
-    }
-    dispatch(authAction.hideLoading());
+    console.log('thien: ', auth, { email, password }, deviceId, deviceToken)
+    // try {
+    //   const user = await userApi.signIn(auth, { email, password }, deviceId, deviceToken);
+    //   dispatch(updateUser(user));
+    //   dispatch(orderAction.updateCurrentOrders(user.currentOrders));
+    // } catch (error) {
+    //   dispatch(appAction.openPopup({ title: 'Error', message: err.message }));
+    // }
+    // dispatch(authAction.hideLoading());
   };
 }
 

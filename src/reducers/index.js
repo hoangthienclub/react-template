@@ -2,6 +2,7 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import throttle from 'lodash/throttle';
 import app from './app';
+import firebase from './firebase';
 import auth from './auth';
 
 const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
@@ -21,7 +22,8 @@ const persistedState = loadState();
 const store = createStoreWithMiddleware(
     combineReducers({
         app,
-        auth
+        auth,
+        firebase
     }),
     persistedState,
 );

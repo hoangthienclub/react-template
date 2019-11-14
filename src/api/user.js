@@ -3,9 +3,9 @@ import { getURL, getHeaders } from "../scripts/helpers"
 
 const url = getURL('user');
 
-const signIn = (authState, { email, password }, deviceId, deviceToken, refreshToken) => {
+const signInTablet = (authState, { email, password }, deviceId, deviceToken, refreshToken) => {
     return api.post({
-        url: `${url}/user/login`,
+        url: `${url}/user/login-tablet`,
         headers: getHeaders(authState),
         body: {
             email,
@@ -40,7 +40,7 @@ const refreshToken = (token, deviceId) => {
 }
 
 export default {
-    signIn,
+    signInTablet,
     signOut,
     refreshToken
 }

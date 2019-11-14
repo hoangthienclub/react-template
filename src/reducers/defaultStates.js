@@ -15,27 +15,12 @@ const defaultStates = {
     },
 
     authState: {
-        anonymousUser: {},
         user: {},
         settings: {
             language: 'en',
         },
     },
-    firebaseState: {},
-    orderState: {
-        cart: {
-            items: [],
-        },
-        activeOrder: {},
-        orderDetails: {},
-        newOrder: {},
-        history: {
-            orders: [],
-        },
-        currentOrders: [],
-    },
-    restaurantState: {},
-    menuState: {},
+    firebaseState: {}
 };
 
 export default defaultStates;

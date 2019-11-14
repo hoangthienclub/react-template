@@ -9,7 +9,6 @@ import Checkbox from "../../components/CheckboxButton";
 import * as appAction from "../../actions/app";
 import * as authAction from "../../actions/auth";
 import "./styles.scss";
-import { fakeAuth } from '../../utils/constants';
 
 const customStyles = {
     content: {
@@ -46,13 +45,22 @@ class SignIn extends Component {
     state = {
         redirectToReferrer: false
     }
-    
-    login = () => {
-        fakeAuth.authenticate(() => {
-            this.setState(() => ({
-                redirectToReferrer: true
-            }))
+
+    changeInput = e  => {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({
+            [name]: value
         })
+    };
+    
+    login = e => {
+        e.preventDefault()
+        const { email, password } = this.state;
+        const {
+            authActions: { signIn },
+        } = this.props;
+        signIn(email.toLowerCase(), password);
     }
 
     render() {
@@ -71,12 +79,23 @@ class SignIn extends Component {
                         <div className="logo">
                             <img src={require("../../images/logo-auth.png")} />
                         </div>
-                        <form className="login-form">
+                        <form className="login-form" onSubmit={this.login}>
                             <div className="item">
-                                <Input title="Email" />
+                                <Input 
+                                    title="Email"
+                                    name="email"
+                                    value={email}
+                                    onChange={this.changeInput}
+                                />
                             </div>
                             <div className="item">
-                                <Input title="Password" type="password" />
+                                <Input 
+                                    title="Password" 
+                                    type="password" 
+                                    name="password"
+                                    value={password}
+                                    onChange={this.changeInput}
+                                />
                             </div>
                             <div className="item row">
                                 <div className="checkbox">
@@ -88,7 +107,7 @@ class SignIn extends Component {
                                 </div>
                             </div>
                             <div className="item">
-                                <Button title="Login" />
+                                <Button title="Login" type='submit'/>
                             </div>
                         </form>
                     </div>
@@ -135,7 +154,7 @@ class SignIn extends Component {
                             <Input title="Rest Password" type='password' />
                         </div>
                         <div className="item">
-                            <Button title="Confirm New Password" />
+                            <Button title="Confirm New Password"/>
                         </div>
                     </form>
                 </Modal>

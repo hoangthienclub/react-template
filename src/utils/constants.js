@@ -29,18 +29,6 @@ const screens = {
 
 const dateTimeFormat = 'MM/DD/YYYY hh:mm A';
 
-const fakeAuth = {
-    isAuthenticated: false,
-    authenticate(cb) {
-        this.isAuthenticated = true
-        setTimeout(cb, 100)
-    },
-    signout(cb) {
-        this.isAuthenticated = false
-        setTimeout(cb, 100)
-    }
-}
-
 export {
     DEV_BASE_URL,
     DEV_VERSION,
@@ -52,6 +40,5 @@ export {
     RESTAURANT_SERVICE_URL,
     ORDER_SERVICE_URL,
     screens,
-    dateTimeFormat,
-    fakeAuth
+    dateTimeFormat
 };
