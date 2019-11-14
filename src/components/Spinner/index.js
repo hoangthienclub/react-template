@@ -30,18 +30,22 @@ const override = css`
 
 export default function({ loading }) {
     return (
-        <Modal isOpen={loading} style={customStyles}>
+        <Modal 
+            isOpen={loading} 
+            style={customStyles}
+            ariaHideApp={false}
+        >
             {/* <GridLoader css={override} color={'#d54526'} radius={0} size={15} loading={true} /> */}
-            <div class="sk-cube-grid">
-                <div class="sk-cube sk-cube1" />
-                <div class="sk-cube sk-cube2" />
-                <div class="sk-cube sk-cube3" />
-                <div class="sk-cube sk-cube4" />
-                <div class="sk-cube sk-cube5" />
-                <div class="sk-cube sk-cube6" />
-                <div class="sk-cube sk-cube7" />
-                <div class="sk-cube sk-cube8" />
-                <div class="sk-cube sk-cube9" />
+            <div className="sk-cube-grid">
+                <div className="sk-cube sk-cube1" />
+                <div className="sk-cube sk-cube2" />
+                <div className="sk-cube sk-cube3" />
+                <div className="sk-cube sk-cube4" />
+                <div className="sk-cube sk-cube5" />
+                <div className="sk-cube sk-cube6" />
+                <div className="sk-cube sk-cube7" />
+                <div className="sk-cube sk-cube8" />
+                <div className="sk-cube sk-cube9" />
             </div>
         </Modal>
     );

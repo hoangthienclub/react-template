@@ -42,10 +42,6 @@ class SignIn extends Component {
         };
     }
 
-    state = {
-        redirectToReferrer: false
-    }
-
     changeInput = e  => {
         const name = e.target.name;
         const value = e.target.value;
@@ -66,10 +62,11 @@ class SignIn extends Component {
     render() {
         const { email, password, forgotPasswordForm, resetPasswordForm, loginForm, redirectToReferrer } = this.state;
         const { from } = this.props.location.state || { from: { pathname: '/' } }
-        const { t } = this.props;
-
-        if (redirectToReferrer === true) {
-            return <Redirect to={from} />
+        const { t, auth } = this.props;
+        if (auth && auth.user &&  auth.user.AccessToken) {
+            return <Redirect to={{
+                pathname: '/home'
+            }} />
         }
       
         return (

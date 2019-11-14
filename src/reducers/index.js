@@ -1,11 +1,12 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import throttle from 'lodash/throttle';
+import logger from 'redux-logger';
 import app from './app';
 import firebase from './firebase';
 import auth from './auth';
 
-const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(createStore);
 
 const loadState = () => {
     try {

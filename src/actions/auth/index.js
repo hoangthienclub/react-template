@@ -1,7 +1,7 @@
 import types from './types';
 import userApi from '../../api/user';
 import { guid } from '../../scripts/helpers';
-import * as authAction from '../app';
+import * as appAction from '../app';
 
 // import {} from api;
 
@@ -14,19 +14,17 @@ export function updateUser(user) {
 
 export function signIn(email, password) {
   return async (dispatch, getState) => {
-    // dispatch(authAction.showLoading());
+    dispatch(appAction.showLoading());
     const { auth, firebase } = getState();
     const deviceId = guid();
     const deviceToken = firebase.token;
-    console.log('thien: ', auth, { email, password }, deviceId, deviceToken)
-    // try {
-    //   const user = await userApi.signIn(auth, { email, password }, deviceId, deviceToken);
-    //   dispatch(updateUser(user));
-    //   dispatch(orderAction.updateCurrentOrders(user.currentOrders));
-    // } catch (error) {
-    //   dispatch(appAction.openPopup({ title: 'Error', message: err.message }));
-    // }
-    // dispatch(authAction.hideLoading());
+    try {
+      const user = await userApi.signInTablet(null, { email, password }, deviceId, deviceToken);
+      dispatch(updateUser(user));
+    } catch (error) {
+      dispatch(appAction.openPopup({ title: 'Error', message: error.message }));
+    }
+    dispatch(appAction.hideLoading());
   };
 }
 

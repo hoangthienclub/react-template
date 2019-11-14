@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, withRouter, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import SignIn from './views/SignIn';
 import Home from './views/Home';
 import setupFirebase from './setupFirebase';
@@ -10,22 +10,16 @@ import * as firebaseAction from './actions/firebase';
 import PrivateRoute from './components/PrivateRoute';
 import './styles/styles.scss';
 import WrappedRoute from './views/WrappedRoute';
-import RequiredAuth from './components/Auth';
 import { screens } from './utils/constants';
 
-// import { useTranslation } from 'react-i18next';
-
 const wrapped = (child, screen) => ({ ...props }) => {
-    // const {t, i18n} = useTranslation()
     return <WrappedRoute component={child} {...props} screen={screen} />;
 };
 
 class AppContainer extends React.Component {
     componentWillMount() {
         const {
-            firebaseActions,
-            authActions,
-            auth: { anonymousUser, user },
+            firebaseActions
         } = this.props;
         setupFirebase(firebaseActions).then(token => {
             firebaseActions.updateFirebaseToken(token);
@@ -37,9 +31,9 @@ class AppContainer extends React.Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route path="/sign-in" component={wrapped(SignIn, screens.SIGN_IN)} />
-                    <PrivateRoute path="/" component={wrapped(Home, screens.HOME)} />
-                    <PrivateRoute path="/home" component={wrapped(Home, screens.HOME)} />
+                    <Route path="/sign-in" component={wrapped(SignIn)} />
+                    <PrivateRoute path="/" component={wrapped(Home)} auth={user}/>
+                    <PrivateRoute path="/home" component={wrapped(Home)} auth={user}/>
                 </Switch>
             </BrowserRouter>
         );
