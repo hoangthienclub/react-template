@@ -16,7 +16,11 @@
             align-items: center;
             li {
                 padding: 20px;
+                cursor: default;
+            }
+            li:hover {
+                color: $blue;
             }
         }
     }
-  }
+}

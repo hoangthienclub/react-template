@@ -11,6 +11,11 @@ export function updateUser(user) {
   };
 }
 
+export function clearUser() {
+  return dispatch => {
+    dispatch({ type: types.CLEAR_USER });
+  };
+}
 
 export function signIn(email, password) {
   return async (dispatch, getState) => {
@@ -34,7 +39,6 @@ export function signOut() {
     const deviceId = guid();
     userApi.signOut(auth, deviceId);
     dispatch(clearUser());
-    dispatch(orderAction.clearOrder());
   };
 }
 

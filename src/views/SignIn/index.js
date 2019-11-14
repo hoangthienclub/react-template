@@ -38,13 +38,24 @@ class SignIn extends Component {
             password: "",
             forgotPasswordForm: false,
             resetPasswordForm: false,
-            loginForm: true
+            loginForm: true,
+            remember: false
         };
+    }
+
+    componentDidMount() {
+        const email = localStorage.getItem('rememberLogin');
+        if (email) {
+            this.setState({
+                email,
+                remember: true
+            })
+        }
     }
 
     changeInput = e  => {
         const name = e.target.name;
-        const value = e.target.value;
+        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
         this.setState({
             [name]: value
         })
@@ -52,15 +63,20 @@ class SignIn extends Component {
     
     login = e => {
         e.preventDefault()
-        const { email, password } = this.state;
+        const { email, password, remember } = this.state;
         const {
             authActions: { signIn },
         } = this.props;
+        if (remember) {
+            localStorage.setItem('rememberLogin', email);
+        }
         signIn(email.toLowerCase(), password);
     }
 
+
+
     render() {
-        const { email, password, forgotPasswordForm, resetPasswordForm, loginForm, redirectToReferrer } = this.state;
+        const { email, password, forgotPasswordForm, resetPasswordForm, loginForm, remember } = this.state;
         const { from } = this.props.location.state || { from: { pathname: '/' } }
         const { t, auth } = this.props;
         if (auth && auth.user &&  auth.user.AccessToken) {
@@ -96,7 +112,12 @@ class SignIn extends Component {
                             </div>
                             <div className="item row">
                                 <div className="checkbox">
-                                    <Checkbox size={20} checked={false} />
+                                    <Checkbox 
+                                        name="remember"
+                                        size={20} 
+                                        checked={remember} 
+                                        onChange={this.changeInput}
+                                    />
                                     <span className="title">Remember me</span>
                                 </div>
                                 <div className="forgot-password">
