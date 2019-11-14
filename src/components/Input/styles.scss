@@ -1,0 +1,19 @@
+@import '../../styles/constants';
+
+.input-common {
+    width: 100%;
+    font-size: 16px;
+    .label {
+        margin-bottom: 10px;
+    }
+    input {
+        height: 40px;
+        background: #fff;
+        border: 1px solid #E8E8E8;
+        border-radius: 30px;
+        width: 100%;
+        padding: 0 20px;
+        font-size: 16px;
+    }
+}
+

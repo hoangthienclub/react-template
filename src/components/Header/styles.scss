@@ -1,0 +1,22 @@
+@import "../../styles/constants.scss"; 
+
+.header-page {
+    height: 80px;
+    background: $dark0;
+    color: $whiteBackground;
+    display: flex;
+    line-height: 80px;
+    justify-content: space-between;
+    padding: 0 100px;
+    .header-right {
+        align-items: center;
+        display: flex;
+        ul {
+            display: flex;
+            align-items: center;
+            li {
+                padding: 20px;
+            }
+        }
+    }
+  }

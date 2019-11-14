@@ -1,0 +1,49 @@
+@import "../../styles/constants";
+
+.popup-notification {
+    .popup-notification-header {
+        background: $actionColor;
+        display: flex;
+        align-items: center;
+        color: $lightText;
+        position: relative;
+        height: 40px;
+        .close-icon {
+            width: 20px;
+            font-size: 32px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 1.2em;
+        }
+    }
+    .popup-body {
+        padding: 15px;
+        text-align: center;
+    }
+    .actions {
+        display: flex;
+        justify-content: space-around;
+        margin: 0px 0px 15px 0px;
+        .action {
+            width: 80px;
+            height: 40px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $lightText;
+            &.ok-button {
+                background: $actionColor
+            }
+            &.close-button {
+                border: 1px solid $darkBackgroundC;
+                color: black;
+            }
+        }
+    }
+}
