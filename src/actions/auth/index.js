@@ -15,7 +15,7 @@ export function updateUser(user) {
 export function signIn(email, password) {
   return async (dispatch, getState) => {
     // dispatch(authAction.showLoading());
-    // const { auth, firebase } = getState();
+    const { auth, firebase } = getState();
     const deviceId = guid();
     const deviceToken = firebase.token;
     console.log('thien: ', auth, { email, password }, deviceId, deviceToken)
